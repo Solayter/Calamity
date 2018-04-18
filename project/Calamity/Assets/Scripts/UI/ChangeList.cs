@@ -10,5 +10,9 @@ public class ChangeList : MonoBehaviour {
     public void Change()
     {
         inventoryUI.type = type;
+        foreach(var n in inventoryUI.buttons)
+        {
+            n.text = "";
+        }
     }
 }
