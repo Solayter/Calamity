@@ -16,7 +16,7 @@ public class ChestOpen : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (flag == false)
             {
