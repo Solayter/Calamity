@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PotionExpiry : MonoBehaviour {
 
+    public AudioSource audio;
     public ParticleSystem boom;
     public MeshRenderer mesh;
     public Rigidbody rb;
@@ -16,6 +17,11 @@ public class PotionExpiry : MonoBehaviour {
             mesh.enabled = false;
             throwed = true;
             rb.isKinematic = true;
+            audio.Play();
+            if(other.CompareTag("Enemy"))
+            {
+                //Эффект зелья
+            }
         }
     }
     private void Update()
