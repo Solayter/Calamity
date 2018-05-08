@@ -5,6 +5,9 @@ using UnityEngine;
 public class DoorOpen : MonoBehaviour
 {
     public Animation anim;
+    public AudioSource audio;
+    public AudioClip open;
+    public AudioClip close;
     private bool flag = false;
 
     private void Start()
@@ -19,6 +22,8 @@ public class DoorOpen : MonoBehaviour
             if (flag == false)
             {
                 anim.PlayQueued("Door_open", QueueMode.PlayNow);
+                audio.clip = open;
+                audio.Play();
                 flag = true;
                 return;
 
@@ -26,6 +31,8 @@ public class DoorOpen : MonoBehaviour
             if (flag == true)
             {
                 anim.PlayQueued("Door_close", QueueMode.PlayNow);
+                audio.clip = close;
+                audio.Play();
                 flag = false;
                 return;
             }
