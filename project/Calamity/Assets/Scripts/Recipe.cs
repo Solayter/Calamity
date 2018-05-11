@@ -9,19 +9,19 @@ public class Recipe : MonoBehaviour
     public string name;
     public string description;
 
-    public string ingred1;
+    public int ingred1;
     public int ingred1Count;
 
-    public string ingred2;
+    public int ingred2;
     public int ingred2Count;
 
-    public string ingred3;
+    public int ingred3;
     public int ingred3Count;
 
     public Recipe(string name, int item, string description,
-                  string ingred1, int ingred1Count,
-                  string ingred2, int ingred2Count,
-                  string ingred3, int ingred3Count)
+                  int ingred1, int ingred1Count,
+                  int ingred2, int ingred2Count,
+                  int ingred3, int ingred3Count)
     {
         this.name = name;
         this.item = item;
