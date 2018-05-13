@@ -8,6 +8,7 @@ public class AlchTable : MonoBehaviour
     public GameObject interf;
     public GameObject player;
     public GameObject alchCam;
+    public bool near = false;
 
     private void OnTriggerStay(Collider other)
     {
@@ -18,20 +19,22 @@ public class AlchTable : MonoBehaviour
             audio.Play();
             alchUI.SetActive(true);
             interf.SetActive(false);
-            Cursor.visible = true;
+            Global.cursor = true;
+            near = true;
             return;
         }
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)&near)
         {
             player.SetActive(true);
             alchCam.SetActive(false);
             audio.Stop();
             alchUI.SetActive(false);
             interf.SetActive(true);
-            Cursor.visible = false;
+            Global.cursor = false;
+            near = false;
             return;
         }
     }

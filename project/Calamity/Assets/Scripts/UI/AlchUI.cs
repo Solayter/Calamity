@@ -15,10 +15,15 @@ public class AlchUI : MonoBehaviour
     public Inventory invent;
     public GameObject recipeScroll;
     public GameObject btnCraft;
+
+    public Text notifText;
+    public GameObject notif;
+
     private int choosenID;
     private bool choosen = false;
     private void Start()
     {
+       
         recipeList = new Recipe[20]
         {
             new Recipe("Зелье восстановления здоровья",21,"Вскипитити воду. Пашол н.",1,1,2,1,3,1),//ингридиент1, его кол-во, ингридиент2, его кол-во, ингридиент3, его кол-во.
@@ -48,6 +53,7 @@ public class AlchUI : MonoBehaviour
 
     public void Button(int id)
     {
+        recipeScroll.SetActive(true);
         choosen = true;
         recipeName.text = recipeList[id].name;
         recipeDescription.text = recipeList[id].description;
@@ -59,22 +65,23 @@ public class AlchUI : MonoBehaviour
 
     public void Update()
     {
-        if((invent.inventoryList[40].amount == 0)&(!choosen))
-            btnCraft.SetActive(false);
-        else
+        if((invent.inventoryList[40].amount != 0)&&
+            (choosen)&&
+            ((invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount != 0)|| 
+            (invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount != 0)|| 
+            (invent.inventoryList[recipeList[choosenID].ingred3 - 1].amount != 0)))
             btnCraft.SetActive(true);
+        else
+            btnCraft.SetActive(false);
+        ingred1.text = invent.inventoryList[recipeList[choosenID].ingred1 - 1].inventoryName + " x " + recipeList[choosenID].ingred1Count + "/" + invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount;
+        ingred2.text = invent.inventoryList[recipeList[choosenID].ingred2 - 1].inventoryName + " x " + recipeList[choosenID].ingred2Count + "/" + invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount;
+        ingred3.text = invent.inventoryList[recipeList[choosenID].ingred3 - 1].inventoryName + " x " + recipeList[choosenID].ingred3Count + "/" + invent.inventoryList[recipeList[choosenID].ingred3 - 1].amount;
 
-        if ((invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount == 0) &
-            (invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount == 0) &
-            (invent.inventoryList[recipeList[choosenID].ingred3 - 1].amount == 0))
-            btnCraft.SetActive(false);
-        else
-            btnCraft.SetActive(true);
     }
     public void Craft()
     {
-        if( (recipeList[choosenID].ingred1Count <= invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount)&
-            (recipeList[choosenID].ingred2Count <= invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount)&
+        if( (recipeList[choosenID].ingred1Count <= invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount)&&
+            (recipeList[choosenID].ingred2Count <= invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount)&&
             (recipeList[choosenID].ingred3Count <= invent.inventoryList[recipeList[choosenID].ingred3 - 1].amount)  )
         {
             invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount -= recipeList[choosenID].ingred1Count;//Крафт удался
@@ -83,6 +90,7 @@ public class AlchUI : MonoBehaviour
             invent.inventoryList[40].amount--;
             invent.inventoryList[recipeList[choosenID].item - 1].find = true;
             invent.inventoryList[recipeList[choosenID].item - 1].amount++;
+            Notification(invent.inventoryList[recipeList[choosenID].item - 1]);
         }
         else 
         {
@@ -92,12 +100,16 @@ public class AlchUI : MonoBehaviour
             invent.inventoryList[40].amount--;
             invent.inventoryList[47].find = true;
             invent.inventoryList[47].amount++;
+            Notification(invent.inventoryList[47]);
         }
-        ingred1.text = invent.inventoryList[recipeList[choosenID].ingred1 - 1].inventoryName + " x " + recipeList[choosenID].ingred1Count + "/" + invent.inventoryList[recipeList[choosenID].ingred1 - 1].amount;
-        ingred2.text = invent.inventoryList[recipeList[choosenID].ingred2 - 1].inventoryName + " x " + recipeList[choosenID].ingred2Count + "/" + invent.inventoryList[recipeList[choosenID].ingred2 - 1].amount;
-        ingred3.text = invent.inventoryList[recipeList[choosenID].ingred3 - 1].inventoryName + " x " + recipeList[choosenID].ingred3Count + "/" + invent.inventoryList[recipeList[choosenID].ingred3 - 1].amount;
-
+        
     }
+    public void Notification(Item item)
+    {
+        notifText.text = "Получен предмет: " + item.inventoryName + " x 1";
+        notif.GetComponent<Animation>().PlayQueued("appear", QueueMode.PlayNow);
+    }
+    
 }
 
 

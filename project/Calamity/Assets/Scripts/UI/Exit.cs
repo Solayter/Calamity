@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour {
+public class Exit : MonoBehaviour {
 
-	public void TestScript()
+   public void ExitGame()
     {
-        Debug.Log("Test");
+        Application.Quit();
     }
 }

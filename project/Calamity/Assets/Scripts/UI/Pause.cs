@@ -2,36 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pause : MonoBehaviour {
+public class Pause : MonoBehaviour
+{
 
     public GameObject PauseUI;
     public GameObject Player;
     public Camera PauseCam;
-    public bool curs;
+    private bool flag = false;
+    public GameObject notif;
 
-    
-    void Update ()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!PauseUI.activeInHierarchy)
+            if (flag == false)
             {
                 PauseUI.SetActive(true);
                 Player.SetActive(false);
                 PauseCam.gameObject.SetActive(true);
-                curs = true;
-                Cursor.lockState = CursorLockMode.None;
+                flag = true;
+                Global.cursor = true;
+                return;
             }
-            else
+            if (flag == true)
             {
-                curs = false;
-                Cursor.lockState = CursorLockMode.Locked;
                 PauseUI.SetActive(false);
                 Player.SetActive(true);
-                PauseCam.gameObject.SetActive(false); 
+                PauseCam.gameObject.SetActive(false);
+                flag = false;
+                Global.cursor = false;
+                notif.SetActive(false);
+                return;
             }
+            
         }
-        Cursor.visible = curs;
-        
     }
 }
+
+
+

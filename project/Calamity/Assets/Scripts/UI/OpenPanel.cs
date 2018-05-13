@@ -9,6 +9,5 @@ public class OpenPanel : MonoBehaviour {
     public void Open()
     {
         newpanel.SetActive(true);
-        player.SetActive(false);
     }
 }

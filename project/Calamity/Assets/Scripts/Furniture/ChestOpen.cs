@@ -18,19 +18,22 @@ public class ChestOpen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (flag == false)
+            if (!anim.isPlaying)
             {
-                anim.PlayQueued("Chest_open", QueueMode.PlayNow);
-                flag = true;
-                items.SetActive(true);
-                return;
-                
-            }
-            if (flag == true)
-            {
-                anim.PlayQueued("Chest_close", QueueMode.PlayNow);
-                flag = false;
-                return;
+                if (flag == false)
+                {
+                    anim.PlayQueued("Chest_open", QueueMode.PlayNow);
+                    flag = true;
+                    items.SetActive(true);
+                    return;
+
+                }
+                if (flag == true)
+                {
+                    anim.PlayQueued("Chest_close", QueueMode.PlayNow);
+                    flag = false;
+                    return;
+                }
             }
         }
     }
