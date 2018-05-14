@@ -7,12 +7,17 @@ public class InventoryUI : MonoBehaviour {
 
     public Inventory inventory;
     public Text[] buttons = new Text[20];
+    public Item item;
     public int type = 0;
-
     public Text itemName;
     public Text itemDescription;
     public RawImage itemImage;
+    public GameObject belt;
 
+    void Start()
+    {
+        item = inventory.inventoryList[59];
+    }
     void Update()
     {
         int i = 0;
@@ -37,6 +42,8 @@ public class InventoryUI : MonoBehaviour {
             itemDescription.text = but.GetComponent<ButtonItem>().item.description;
             itemImage.texture = but.GetComponent<ButtonItem>().item.image.texture;
             itemImage.color = new Color32(255, 255, 255, 255);
+            item = but.GetComponent<ButtonItem>().item;
         }
+        
     }
 }

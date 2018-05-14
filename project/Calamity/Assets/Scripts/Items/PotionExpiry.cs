@@ -6,15 +6,15 @@ public class PotionExpiry : MonoBehaviour {
 
     public AudioSource audio;
     public ParticleSystem boom;
-    public MeshRenderer mesh;
+    public GameObject body;
     public Rigidbody rb;
     public bool throwed = false;
     private void OnTriggerEnter(Collider other)
     {
-        if(!other.CompareTag("Player")&!throwed)
+        if(!other.CompareTag("Player")& !throwed & gameObject.CompareTag("Untagged"))
         {
             boom.Play();
-            mesh.enabled = false;
+            body.SetActive(false);
             throwed = true;
             rb.isKinematic = true;
             audio.Play();
