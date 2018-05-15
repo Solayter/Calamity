@@ -9,15 +9,21 @@ public class Interaction : MonoBehaviour {
     public GameObject active;
 
     public Text itemName;
-    public GameObject nameObject;
-
+    public GameObject nameItem;
+    public Text subjectName;
+    public GameObject nameSubject;
     private void OnTriggerStay(Collider other)      //Отобразить имя предмета
     {
         if (other.CompareTag("Collectable"))
         {
             active = other.gameObject;
-            nameObject.SetActive(true);
+            nameItem.SetActive(true);
             itemName.text = other.GetComponent<Item>().inventoryName + " <E>";
+        }
+        if (other.CompareTag("Usable"))
+        {
+            nameSubject.SetActive(true);
+            subjectName.text = other.GetComponent<SubjectName>().name + " <F>";
         }
     }
     private void OnTriggerExit(Collider other)      //Скрыть имя
@@ -25,8 +31,14 @@ public class Interaction : MonoBehaviour {
         if (other.gameObject == active)
         {
             active = null;
-            nameObject.SetActive(false);
+            nameItem.SetActive(false);
             itemName.text = "";
+        }
+        if (other.CompareTag("Usable"))
+        {
+            active = other.gameObject;
+            nameSubject.SetActive(false);
+            subjectName.text = "";
         }
     }
     private void Update()
@@ -43,7 +55,7 @@ public class Interaction : MonoBehaviour {
                             n.find = true;
                             Destroy(active.gameObject);
                             itemName.text = "";
-                            nameObject.SetActive(false);
+                            nameItem.SetActive(false);
                             active = null;
                             return;
                         }
@@ -51,7 +63,7 @@ public class Interaction : MonoBehaviour {
         }
         if(active == null)
         {
-            nameObject.SetActive(false);
+            nameItem.SetActive(false);
             itemName.text = "";
         }
     }

@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UsePotion : MonoBehaviour {
+
+    public PersonController perCtrl;
 
     public ChoosePotion chPot;
     GameObject Throwing;
@@ -14,7 +17,16 @@ public class UsePotion : MonoBehaviour {
         {
             if (chPot.choosenPotion.potionType == 1)
             {
-                //выпить зелье
+                switch (chPot.choosenPotion.itemID)
+                {
+                    case 21:
+                        perCtrl.healthPointsValue = perCtrl.healthPointsValue + perCtrl.healthPointsValue*0.3F;
+                        if (perCtrl.healthPointsValue > perCtrl.healthPointsMax)
+                            perCtrl.healthPointsValue = perCtrl.healthPointsMax;
+                        break;
+                    default:
+                        break;
+                }
             }
             if (chPot.choosenPotion.potionType == 2)
             {

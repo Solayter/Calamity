@@ -1,16 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Pause : MonoBehaviour
 {
-
+    public FirstPersonController fpsCtrl;
     public GameObject PauseUI;
-    public GameObject Player;
-    public Camera PauseCam;
+    public GameObject Interface;
     private bool flag = false;
     public GameObject notif;
-
+    public AudioListener audlistn;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -18,8 +18,9 @@ public class Pause : MonoBehaviour
             if (flag == false)
             {
                 PauseUI.SetActive(true);
-                Player.SetActive(false);
-                PauseCam.gameObject.SetActive(true);
+                audlistn.enabled = false;
+                fpsCtrl.enabled = false;
+                Interface.SetActive(false);
                 flag = true;
                 Global.cursor = true;
                 return;
@@ -27,8 +28,9 @@ public class Pause : MonoBehaviour
             if (flag == true)
             {
                 PauseUI.SetActive(false);
-                Player.SetActive(true);
-                PauseCam.gameObject.SetActive(false);
+                audlistn.enabled = true;
+                fpsCtrl.enabled = true;
+                Interface.SetActive(true);
                 flag = false;
                 Global.cursor = false;
                 notif.SetActive(false);
