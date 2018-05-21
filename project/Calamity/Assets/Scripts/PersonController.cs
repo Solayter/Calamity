@@ -6,6 +6,7 @@ public class PersonController : MonoBehaviour
 {
     public FirstPersonController fpsCtrl;
     public GameObject hpBar;
+    public Death dth;
     public float healthPointsMax = 100;
     public float healthPointsValue = 100;
     public int speedRun = 12;
@@ -13,10 +14,22 @@ public class PersonController : MonoBehaviour
 
     private void Update()
     {
-        //hpBar.transform.lossyScale.Scale(new Vector3(, 1, 1));
+        if (healthPointsValue < 0)
+        {
+            healthPointsValue = 0;
+            Death();
+        }
+        if (healthPointsValue > 0)
+            hpBar.transform.localScale = new Vector3(healthPointsValue / healthPointsMax * 0.76F, 1F, 1F);
+        else if (healthPointsValue == 0)
+            hpBar.transform.localScale = new Vector3(0F, 1F, 1F);
 
-        hpBar.transform.localScale = new Vector3(healthPointsValue / healthPointsMax * 0.76F, 1F, 1F);
-        fpsCtrl.SetValues(speedRun, speedJump);
+        
+    }
+    private void Death()
+    {
+        gameObject.tag = "Untagged";
+        dth.End();
     }
 }
 

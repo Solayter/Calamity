@@ -20,7 +20,7 @@ public class UsePotion : MonoBehaviour {
                 switch (chPot.choosenPotion.itemID)
                 {
                     case 21:
-                        perCtrl.healthPointsValue = perCtrl.healthPointsValue + perCtrl.healthPointsValue*0.3F;
+                        perCtrl.healthPointsValue = perCtrl.healthPointsValue + perCtrl.healthPointsMax*0.3F;
                         if (perCtrl.healthPointsValue > perCtrl.healthPointsMax)
                             perCtrl.healthPointsValue = perCtrl.healthPointsMax;
                         break;
@@ -31,6 +31,7 @@ public class UsePotion : MonoBehaviour {
             if (chPot.choosenPotion.potionType == 2)
             {
                 Throwing = Instantiate(chPot.choosenPotion.gameObject, transform.position, transform.rotation);
+                Throwing.GetComponent<Rigidbody>().isKinematic = false;
                 Throwing.GetComponent<Rigidbody>().AddForce(transform.forward * force);
                 Throwing.tag = "Untagged";
                 
