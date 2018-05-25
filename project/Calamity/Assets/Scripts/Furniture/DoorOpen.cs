@@ -17,27 +17,28 @@ public class DoorOpen : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (!anim.isPlaying)
+        if (other.gameObject.CompareTag("Player")) {
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if (flag == false)
+                if (!anim.isPlaying)
                 {
-                    anim.PlayQueued("Door_open", QueueMode.PlayNow);
-                    audio.clip = open;
-                    audio.Play();
-                    flag = true;
-                    return;
+                    if (flag == false)
+                    {
+                        anim.PlayQueued("Door_open", QueueMode.PlayNow);
+                        audio.clip = open;
+                        audio.Play();
+                        flag = true;
+                        return;
 
-                }
-                if (flag == true)
-                {
-                    anim.PlayQueued("Door_close", QueueMode.PlayNow);
-                    audio.clip = close;
-                    audio.Play();
-                    flag = false;
-                    return;
+                    }
+                    if (flag == true)
+                    {
+                        anim.PlayQueued("Door_close", QueueMode.PlayNow);
+                        audio.clip = close;
+                        audio.Play();
+                        flag = false;
+                        return;
+                    }
                 }
             }
         }
