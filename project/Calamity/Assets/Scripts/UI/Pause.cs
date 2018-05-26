@@ -11,7 +11,7 @@ public class Pause : MonoBehaviour
     public GameObject Interface;
     private bool flag = false;
     public GameObject notif;
-    public AudioListener audlistn;
+    //public AudioListener audlistn;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -19,7 +19,7 @@ public class Pause : MonoBehaviour
             if (flag == false)
             {
                 PauseUI.SetActive(true);
-                audlistn.enabled = false;
+                //audlistn.enabled = false;
                 fpsCtrl.enabled = false;
                 uspot.enabled = false;
                 Interface.SetActive(false);
@@ -30,7 +30,7 @@ public class Pause : MonoBehaviour
             if (flag == true)
             {
                 PauseUI.SetActive(false);
-                audlistn.enabled = true;
+                //audlistn.enabled = true;
                 fpsCtrl.enabled = true;
                 uspot.enabled = true;
                 Interface.SetActive(true);

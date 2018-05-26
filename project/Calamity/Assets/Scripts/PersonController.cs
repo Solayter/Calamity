@@ -9,6 +9,7 @@ public class PersonController : MonoBehaviour
     public Death dth;
     public float healthPointsMax = 100;
     public float healthPointsValue = 100;
+    public float armor = 1;
     public int speedRun = 12;
     public int speedJump = 8;
 

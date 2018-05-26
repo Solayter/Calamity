@@ -66,7 +66,7 @@ public class EnemyAI : MonoBehaviour {
                 if (!aud.isPlaying)
                 {
                     aud.PlayOneShot(attack);
-                    srch.player.GetComponent<PersonController>().healthPointsValue -= 20;
+                    srch.player.GetComponent<PersonController>().healthPointsValue -= (20 - srch.player.GetComponent<PersonController>().armor);
                 }
             }
         }
